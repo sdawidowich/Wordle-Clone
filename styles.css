@@ -1,0 +1,89 @@
+* {
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100vw;
+    height: 100vh;
+    background-color: #121213;
+    margin: 0;
+}
+
+header {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #3a3a3c;
+}
+
+.menu-left {
+    display: flex;
+}
+
+.spacer {
+    width: 32px;
+    height: 29px;
+}
+
+.logo {
+    flex: 1;
+    text-align: center;
+    font-size: 34px;
+}
+
+button {
+    border: none;
+    background: transparent;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#gameboard {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tile {
+    margin: 2px;
+    width: 60px;
+    height: 60px;
+    border: 2px solid #3a3a3c;
+    flex: 0 1 auto;
+}
+
+#keyboard {
+    margin: 5px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.keyboard-btns {
+    background: grey;
+    color: white;
+    border-radius: 4px;
+    width: 45px;
+    height: 60px;
+    margin: 3.5px;
+    font-weight: bold;
+    flex: 0 1 auto;
+}
+
+.keyboard-btns[data-key="BACKSPACE"] {
+    width: 110px;
+}
+
+.keyboard-btns[data-key="ENTER"] {
+    width: 70px;
+}
