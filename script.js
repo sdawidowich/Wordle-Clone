@@ -26,14 +26,25 @@ function makeKeyboard() {
 
 
 function game() {
+    function readTextFile(filePath) {
+        let result = null;
+        let xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", filePath, false);
+        xmlHttp.send();
+        if (xmlHttp.status==200) {
+            result = xmlHttp.responseText;
+        }
+        return result;
+    }
+
     function updateBoard(letter, action) {
         if (action === "add") {
             const tile = document.querySelectorAll(".tile");
-            tile[numEnteredLetters].textContent = letter;
+            tile[numEnteredLetters + 5 * numAttempts].textContent = letter;
         }
         else if (action === "remove") {
             const tile = document.querySelectorAll(".tile");
-            tile[numEnteredLetters].textContent = "";
+            tile[numEnteredLetters + 5 * numAttempts].textContent = "";
         }
         
     }
@@ -41,23 +52,52 @@ function game() {
     function keyboardClick(button) {
         let letter = button.target.dataset.key;
         if (letter === "BACKSPACE") {
-            numEnteredLetters--;
-            updateBoard(letter, "remove");
-            attempt[numEnteredLetters] = undefined;
+            if (numEnteredLetters >= 1) {
+                numEnteredLetters--;
+                updateBoard(letter, "remove");
+                attempt[numEnteredLetters] = undefined;
+            }
         }
         else if (letter === "ENTER") {
-            
+            if (numEnteredLetters === 5) {
+                let isValid = false;
+                let attemptStr = attempt.join("").toLocaleLowerCase();
+
+                for (let i = 0; i < validWords.length; i++) {
+                    if (attemptStr === validWords[i]) {
+                        isValid = true;
+                        break;
+                    }
+                }
+                
+                if (isValid) {
+                    if (attemptStr === solutionWord) {
+                        console.log("Winner");
+                    }
+                    numAttempts++;
+                }
+                else {
+                    
+                }
+                console.log(isValid);
+            }
+            else{
+                console.log("Not enough letters.");
+            }
         }
         else {
             if (numEnteredLetters < 5) {
                 attempt[numEnteredLetters] = letter;
                 updateBoard(letter, "add");
                 numEnteredLetters++;
-                console.log(letter);
             }
         }
         
     }
+    
+    let validWords = readTextFile("word-lists/valid-words.txt").split("\r\n");
+    let possibleSolutions = readTextFile("word-lists/possible-solutions.txt").split("\r\n");
+    let solutionWord = possibleSolutions[Math.floor(Math.random() * possibleSolutions.length)];
 
     let attempt = [];
     let numEnteredLetters = 0;
