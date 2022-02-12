@@ -24,11 +24,51 @@ function makeKeyboard() {
     }
 }
 
+
 function game() {
+    function updateBoard(letter, action) {
+        if (action === "add") {
+            const tile = document.querySelectorAll(".tile");
+            tile[numEnteredLetters].textContent = letter;
+        }
+        else if (action === "remove") {
+            const tile = document.querySelectorAll(".tile");
+            tile[numEnteredLetters].textContent = "";
+        }
+        
+    }
+
+    function keyboardClick(button) {
+        let letter = button.target.dataset.key;
+        if (letter === "BACKSPACE") {
+            numEnteredLetters--;
+            updateBoard(letter, "remove");
+            attempt[numEnteredLetters] = undefined;
+        }
+        else if (letter === "ENTER") {
+            
+        }
+        else {
+            if (numEnteredLetters < 5) {
+                attempt[numEnteredLetters] = letter;
+                updateBoard(letter, "add");
+                numEnteredLetters++;
+                console.log(letter);
+            }
+        }
+        
+    }
+
     let attempt = [];
+    let numEnteredLetters = 0;
     let numAttempts = 0;
 
+    const keyButtons = document.querySelectorAll(".keyboard-btns");
+    keyButtons.forEach((button) => {
+        button.addEventListener("click", keyboardClick);
+    });
 }
 
 makeGameboard();
 makeKeyboard();
+game();

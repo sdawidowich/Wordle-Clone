@@ -56,8 +56,14 @@ button:hover {
     margin: 2px;
     width: 60px;
     height: 60px;
+    line-height: 60px;
     border: 2px solid #3a3a3c;
     flex: 0 1 auto;
+    color: white;
+    text-align: center;
+    vertical-align: baseline;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 #keyboard {
