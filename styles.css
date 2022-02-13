@@ -53,6 +53,7 @@ button:hover {
 }
 
 .tile {
+    text-orientation: upright;
     margin: 2px;
     width: 60px;
     height: 60px;
@@ -64,6 +65,20 @@ button:hover {
     vertical-align: baseline;
     font-size: 28px;
     font-weight: bold;
+}
+
+@keyframes pop {
+    From {
+        scale: 1;
+    }
+    To {
+        scale: 1.15;
+    }
+}
+
+.tile.filled {
+    border: 2px solid #4d4e4f;
+    animation: pop 0.075s;
 }
 
 #keyboard {
@@ -84,6 +99,54 @@ button:hover {
     margin: 3.5px;
     font-weight: bold;
     flex: 0 1 auto;
+}
+
+@keyframes rotate-in {
+    From {
+        transform: rotateX(0deg);
+    }
+    To {
+        transform: rotateX(90deg);
+    }
+}
+
+@keyframes rotate-out {
+    From {
+        transform: rotateX(90deg);
+    }
+    To {
+        transform: rotateX(0deg);
+    }
+}
+
+.tile.grey[data-rowpos="0"], .tile.yellow[data-rowpos="0"], .tile.green[data-rowpos="0"] {
+    transition: background-color 0s 0.25s, border 0s 0.25s;
+    animation: rotate-in 0.25s, rotate-out 0.25s 0.25s;
+}
+
+.tile.grey[data-rowpos="1"], .tile.yellow[data-rowpos="1"], .tile.green[data-rowpos="1"] {
+    transition: background-color 0s 0.35s, border 0s 0.35s;
+    animation: rotate-in 0.25s 0.1s, rotate-out 0.25s 0.35s;
+}
+
+.tile.grey[data-rowpos="2"], .tile.yellow[data-rowpos="2"], .tile.green[data-rowpos="2"] {
+    transition: background-color 0s 0.45s, border 0s 0.45s;
+    animation: rotate-in 0.25s 0.2s, rotate-out 0.25s 0.45s;
+}
+
+.tile.grey[data-rowpos="3"], .tile.yellow[data-rowpos="3"], .tile.green[data-rowpos="3"] {
+    transition: background-color 0s 0.55s, border 0s 0.55s;
+    animation: rotate-in 0.25s 0.3s, rotate-out 0.25s 0.55s;
+}
+
+.tile.grey[data-rowpos="4"], .tile.yellow[data-rowpos="4"], .tile.green[data-rowpos="4"] {
+    transition: background-color 0s 0.65s, border 0s 0.65s;
+    animation: rotate-in 0.25s 0.4s, rotate-out 0.25s 0.65s;
+}
+
+.tile.grey, .tile.yellow, .tile.green {
+    transform-origin: 50% 50%;
+    transform-style: preserve-3d;
 }
 
 .keyboard-btns.grey, .tile.grey {

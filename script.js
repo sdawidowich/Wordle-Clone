@@ -4,6 +4,7 @@ function makeGameboard() {
     for (let i = 0; i < 30; i++) {
         const tile = document.createElement("div");
         tile.classList.add("tile");
+        tile.dataset.rowpos = i % 5;
         gameboard.appendChild(tile);
     }
 }
@@ -49,10 +50,12 @@ function game() {
         if (action === "add") {
             const tile = document.querySelectorAll(".tile");
             tile[numEnteredLetters + 5 * numAttempts].textContent = letter;
+            tile[numEnteredLetters + 5 * numAttempts].classList.add("filled");
         }
         else if (action === "remove") {
             const tile = document.querySelectorAll(".tile");
             tile[numEnteredLetters + 5 * numAttempts].textContent = "";
+            tile[numEnteredLetters + 5 * numAttempts].classList.remove("filled");
         }
     }
     
@@ -130,10 +133,13 @@ function game() {
         }
         
     }
+    makeGameboard();
+    makeKeyboard();
     
     let validWords = readTextFile("word-lists/valid-words.txt").split("\r\n");
     let possibleSolutions = readTextFile("word-lists/possible-solutions.txt").split("\r\n");
-    let solutionWord = possibleSolutions[Math.floor(Math.random() * possibleSolutions.length)];
+    // let solutionWord = possibleSolutions[Math.floor(Math.random() * possibleSolutions.length)];
+    let solutionWord = "sheet";
 
     let attempt = [];
     let numEnteredLetters = 0;
@@ -145,6 +151,4 @@ function game() {
     });
 }
 
-makeGameboard();
-makeKeyboard();
 game();
