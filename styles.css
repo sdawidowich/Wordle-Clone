@@ -86,6 +86,30 @@ button:hover {
     flex: 0 1 auto;
 }
 
+.keyboard-btns.grey, .tile.grey {
+    background-color: #3a3a3c;
+}
+
+.tile.grey {
+    border: 2px solid #3a3a3c;
+}
+
+.keyboard-btns.yellow, .tile.yellow {
+    background-color: #b59f3b;
+}
+
+.tile.yellow {
+    border: 2px solid #b59f3b;
+}
+
+.keyboard-btns.green, .tile.green {
+    background-color: #538d4e;
+}
+
+.tile.green {
+    border: 2px solid #538d4e;
+}
+
 .keyboard-btns[data-key="BACKSPACE"] {
     width: 110px;
 }

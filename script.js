@@ -37,6 +37,14 @@ function game() {
         return result;
     }
 
+    function checkValidWord(word) {
+        for (let i = 0; i < validWords.length; i++) {
+            if (word === validWords[i]) {
+                return true;
+            }
+        }
+    }
+
     function updateBoard(letter, action) {
         if (action === "add") {
             const tile = document.querySelectorAll(".tile");
@@ -46,7 +54,43 @@ function game() {
             const tile = document.querySelectorAll(".tile");
             tile[numEnteredLetters + 5 * numAttempts].textContent = "";
         }
-        
+    }
+    
+    function giveFeedback(word) {
+        const tile = document.querySelectorAll(".tile");
+        const keyboard = document.querySelectorAll(".keyboard-btns");
+        const keyboardArr = Array.from(keyboard);
+        let wordArr = word.split("");
+        let solutionArr = solutionWord.split("");
+
+        for (let i = 0; i < 5; i++) {
+            let foundMatch = false;
+            for (let j = 0; j < 5; j++) {
+                if (wordArr[i] === solutionArr[j] && i === j) {
+                    tile[i + 5 * numAttempts].classList.add("green");
+                    keyboard[keyboardArr.findIndex((element) => element.dataset.key === wordArr[i].toLocaleUpperCase())].classList.add("green");
+                    foundMatch = true;
+                    break;
+                }
+                else if (wordArr[i] === solutionArr[j]) {
+                    tile[i + 5 * numAttempts].classList.add("yellow");
+                    keyboard[keyboardArr.findIndex((element) => element.dataset.key === wordArr[i].toLocaleUpperCase())].classList.add("yellow");
+                    foundMatch = true;
+                    break;
+                }
+            }
+            if (!foundMatch) {
+                tile[i + 5 * numAttempts].classList.add("grey");
+                keyboard[keyboardArr.findIndex((element) => element.dataset.key === wordArr[i].toLocaleUpperCase())].classList.add("grey");
+            }
+        }
+        if (word === solutionWord) {
+            console.log("Winner");
+            const keyButtons = document.querySelectorAll(".keyboard-btns");
+            keyButtons.forEach((button) => {
+                button.removeEventListener("click", keyboardClick);
+            });
+        }
     }
 
     function keyboardClick(button) {
@@ -60,26 +104,18 @@ function game() {
         }
         else if (letter === "ENTER") {
             if (numEnteredLetters === 5) {
-                let isValid = false;
                 let attemptStr = attempt.join("").toLocaleLowerCase();
-
-                for (let i = 0; i < validWords.length; i++) {
-                    if (attemptStr === validWords[i]) {
-                        isValid = true;
-                        break;
-                    }
-                }
+                let isValid = checkValidWord(attemptStr);
                 
                 if (isValid) {
-                    if (attemptStr === solutionWord) {
-                        console.log("Winner");
-                    }
+                    giveFeedback(attemptStr);
                     numAttempts++;
+                    numEnteredLetters = 0;
+                    attempt = [];
                 }
                 else {
                     
                 }
-                console.log(isValid);
             }
             else{
                 console.log("Not enough letters.");
