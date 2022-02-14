@@ -72,12 +72,14 @@ function game() {
                 if (wordArr[i] === solutionArr[j] && i === j) {
                     tile[i + 5 * numAttempts].classList.add("green");
                     keyboard[keyboardArr.findIndex((element) => element.dataset.key === wordArr[i].toLocaleUpperCase())].classList.add("green");
+                    solutionArr[j] = " ";
                     foundMatch = true;
                     break;
                 }
                 else if (wordArr[i] === solutionArr[j]) {
                     tile[i + 5 * numAttempts].classList.add("yellow");
                     keyboard[keyboardArr.findIndex((element) => element.dataset.key === wordArr[i].toLocaleUpperCase())].classList.add("yellow");
+                    solutionArr[j] = " ";
                     foundMatch = true;
                     break;
                 }
@@ -139,7 +141,9 @@ function game() {
     let validWords = readTextFile("./word-lists/valid-words.txt").split("\r\n");
     let possibleSolutions = readTextFile("./word-lists/possible-solutions.txt").split("\r\n");
     let solutionWord = possibleSolutions[Math.floor(Math.random() * possibleSolutions.length)];
-    // let solutionWord = "sheet";
+
+    console.log(validWords);
+    console.log(possibleSolutions);
 
     let attempt = [];
     let numEnteredLetters = 0;

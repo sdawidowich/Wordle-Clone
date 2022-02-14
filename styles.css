@@ -41,6 +41,11 @@ button {
     background: transparent;
 }
 
+button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 button:hover {
     cursor: pointer;
 }
