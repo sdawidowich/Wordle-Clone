@@ -136,8 +136,8 @@ function game() {
     makeGameboard();
     makeKeyboard();
     
-    let validWords = readTextFile("/word-lists/valid-words.txt").split("\r\n");
-    let possibleSolutions = readTextFile("/word-lists/possible-solutions.txt").split("\r\n");
+    let validWords = readTextFile("word-lists/valid-words.txt").split("\r\n");
+    let possibleSolutions = readTextFile("word-lists/possible-solutions.txt").split("\r\n");
     let solutionWord = possibleSolutions[Math.floor(Math.random() * possibleSolutions.length)];
     // let solutionWord = "sheet";
 
