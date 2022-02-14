@@ -138,8 +138,22 @@ function game() {
     makeGameboard();
     makeKeyboard();
     
-    let validWords = readTextFile("./word-lists/valid-words.txt").split("\r\n");
-    let possibleSolutions = readTextFile("./word-lists/possible-solutions.txt").split("\r\n");
+    let validWords = readTextFile("./word-lists/valid-words.txt");
+    // Fixes issue when splitting string into array. In github pages, there would not be a \r character
+    if (validWords.search("\r") > 0) {
+        validWords = validWords.split("\r\n");
+    }
+    else {
+        validWords = validWords.split("\n");
+    }
+
+    let possibleSolutions = readTextFile("./word-lists/possible-solutions.txt");
+    if (possibleSolutions.search("\r") > 0) {
+        possibleSolutions = possibleSolutions.split("\r\n");
+    }
+    else {
+        possibleSolutions = possibleSolutions.split("\n");
+    }
     let solutionWord = possibleSolutions[Math.floor(Math.random() * possibleSolutions.length)];
 
     console.log(validWords);
