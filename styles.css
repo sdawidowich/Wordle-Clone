@@ -106,6 +106,17 @@ button:hover {
     flex: 0 1 auto;
 }
 
+@keyframes tile-color {
+    From {
+        background-color: transparent;
+        border: 2px solid #4d4e4f;
+    }
+    To {
+        background-color: transparent;
+        border: 2px solid #4d4e4f;
+    }
+}
+
 @keyframes rotate-in {
     From {
         transform: rotateX(0deg);
@@ -125,28 +136,23 @@ button:hover {
 }
 
 .tile.grey[data-rowpos="0"], .tile.yellow[data-rowpos="0"], .tile.green[data-rowpos="0"] {
-    transition: background-color 0s 0.25s, border 0s 0.25s;
-    animation: rotate-in 0.25s, rotate-out 0.25s 0.25s;
+    animation: tile-color 0.25s, rotate-in 0.25s, rotate-out 0.25s 0.25s;
 }
 
 .tile.grey[data-rowpos="1"], .tile.yellow[data-rowpos="1"], .tile.green[data-rowpos="1"] {
-    transition: background-color 0s 0.35s, border 0s 0.35s;
-    animation: rotate-in 0.25s 0.1s, rotate-out 0.25s 0.35s;
+    animation: tile-color 0.35s, rotate-in 0.25s 0.1s, rotate-out 0.25s 0.35s;
 }
 
 .tile.grey[data-rowpos="2"], .tile.yellow[data-rowpos="2"], .tile.green[data-rowpos="2"] {
-    transition: background-color 0s 0.45s, border 0s 0.45s;
-    animation: rotate-in 0.25s 0.2s, rotate-out 0.25s 0.45s;
+    animation: tile-color 0.45s, rotate-in 0.25s 0.2s, rotate-out 0.25s 0.45s;
 }
 
 .tile.grey[data-rowpos="3"], .tile.yellow[data-rowpos="3"], .tile.green[data-rowpos="3"] {
-    transition: background-color 0s 0.55s, border 0s 0.55s;
-    animation: rotate-in 0.25s 0.3s, rotate-out 0.25s 0.55s;
+    animation: tile-color 0.55s, rotate-in 0.25s 0.3s, rotate-out 0.25s 0.55s;
 }
 
 .tile.grey[data-rowpos="4"], .tile.yellow[data-rowpos="4"], .tile.green[data-rowpos="4"] {
-    transition: background-color 0s 0.65s, border 0s 0.65s;
-    animation: rotate-in 0.25s 0.4s, rotate-out 0.25s 0.65s;
+    animation: tile-color 0.65s, rotate-in 0.25s 0.4s, rotate-out 0.25s 0.65s;
 }
 
 .tile.grey, .tile.yellow, .tile.green {
